@@ -3,7 +3,29 @@
 
 #include "catch.hpp"
 #include "roman.h"
+#include <string>
+#include <algorithm>
 
+TEST_CASE( "Property testing" )
+{
+    GIVEN("Any number from 1") {
+        
+        auto value = GENERATE(take(100, random(1, 10000)));
+        auto roman = to_roman(value);
+ 
+        THEN("There are never more than three consecutive decimals except for 1000") {
+            REQUIRE( std::search_n(roman.begin(), roman.end(), 4, 'I') == roman.end());
+            REQUIRE( std::search_n(roman.begin(), roman.end(), 4, 'X') == roman.end());
+            REQUIRE( std::search_n(roman.begin(), roman.end(), 4, 'C') == roman.end());
+        }
+        
+        THEN("There are never more than one half-decimal") {
+            REQUIRE( std::search_n(roman.begin(), roman.end(), 2, 'V') == roman.end());
+            REQUIRE( std::search_n(roman.begin(), roman.end(), 2, 'L') == roman.end());
+            REQUIRE( std::search_n(roman.begin(), roman.end(), 2, 'D') == roman.end());
+        }
+    }
+}
 
 TEST_CASE( "Life the universe and everything", "[hhgttg]" )
 {
@@ -51,6 +73,7 @@ TEST_CASE( "Life the universe and everything", "[hhgttg]" )
     REQUIRE( to_roman(42) == "XLII" );
     }
 
+#ifdef CATCH_CONFIG_ENABLE_BENCHMARKING
     SECTION("Benchmark") {
         BENCHMARK("1 digit") {
             return to_roman(1);
@@ -68,4 +91,5 @@ TEST_CASE( "Life the universe and everything", "[hhgttg]" )
             return to_roman(5573);
         };
     }
+#endif
 }

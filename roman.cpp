@@ -3,11 +3,11 @@
 #include <string>
 #include <string_view>
 
-#define SLOW_BUT_READABLE
+#define IMPLEMENTATION 1
 
-#if defined(SLOW_BUT_READABLE)
+#if IMPLEMENTATION == 1
 
-constexpr const std::string_view romand_decades[3][10]{
+constexpr const alignas(64) std::string_view romand_decades[3][10]{
     {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"},
     {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"},
     {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"},
@@ -40,7 +40,58 @@ std::string to_roman(unsigned int value) noexcept
     return s;
 }
 
-#else
+#elif IMPLEMENTATION == 2
+
+std::string to_roman(unsigned int value) noexcept
+{
+    if (value == 0)
+        return "nulla";
+
+    std::string s;
+
+    auto milla = value / 1000;
+    s.append(milla, 'M');
+
+    switch (value % 1000 / 100) {
+        case 1: s += std::string_view{"C"}; break;
+        case 2: s += std::string_view{"CC"}; break;
+        case 3: s += std::string_view{"CCC"}; break;
+        case 4: s += std::string_view{"CD"}; break;
+        case 5: s += std::string_view{"D"}; break;
+        case 6: s += std::string_view{"DC"}; break;
+        case 7: s += std::string_view{"DCC"}; break;
+        case 8: s += std::string_view{"DCCC"}; break;
+        case 9: s += std::string_view{"CM"}; break;
+    }
+
+    switch (value % 100 / 10) {
+        case 1: s += std::string_view{"X"}; break;
+        case 2: s += std::string_view{"XX"}; break;
+        case 3: s += std::string_view{"XXX"}; break;
+        case 4: s += std::string_view{"XL"}; break;
+        case 5: s += std::string_view{"L"}; break;
+        case 6: s += std::string_view{"LX"}; break;
+        case 7: s += std::string_view{"LXX"}; break;
+        case 8: s += std::string_view{"LXXX"}; break;
+        case 9: s += std::string_view{"XC"}; break;
+    }
+
+    switch (value % 10) {
+        case 1: s += std::string_view{"I"}; break;
+        case 2: s += std::string_view{"II"}; break;
+        case 3: s += std::string_view{"III"}; break;
+        case 4: s += std::string_view{"IV"}; break;
+        case 5: s += std::string_view{"V"}; break;
+        case 6: s += std::string_view{"VI"}; break;
+        case 7: s += std::string_view{"VII"}; break;
+        case 8: s += std::string_view{"VIII"}; break;
+        case 9: s += std::string_view{"IX"}; break;
+    }
+
+    return s;
+}
+
+#elif IMPLEMENTATION == 3
 
 static alignas(64) constexpr char kRomanDigits[]{"IVIIIXLXXXCDCCCM"};
 
