@@ -1,0 +1,85 @@
+# IMPORTANT: Please use ClangFormat 7.0 to ensure consistent formatting.
+---
+Language: Cpp
+BasedOnStyle: LLVM
+AccessModifierOffset: -4
+AlignEscapedNewlinesLeft: true
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignTrailingComments: false
+AlignAfterOpenBracket: AlwaysBreak
+AllowShortFunctionsOnASingleLine: InlineOnly
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AlwaysBreakTemplateDeclarations: true
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+BinPackArguments: false
+BinPackParameters: false
+BraceWrapping:
+   AfterClass:             true
+   AfterControlStatement:  false
+   AfterEnum:              true
+   AfterFunction:          true
+   AfterNamespace:         false
+   AfterObjCDeclaration:   true
+   AfterStruct:            true
+   AfterUnion:             false
+   BeforeCatch:            false
+   BeforeElse:             false
+   IndentBraces:           false
+   SplitEmptyFunction:     false
+   SplitEmptyRecord:       false
+   SplitEmptyNamespace:    false
+BreakBeforeBraces: Custom
+BreakInheritanceList: BeforeColon
+BreakConstructorInitializersBeforeComma: false
+BreakConstructorInitializers: BeforeColon
+ColumnLimit: 80
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ConstructorInitializerIndentWidth: 2
+ContinuationIndentWidth: 4
+FixNamespaceComments: true
+ForEachMacros:
+  - foreach
+  - Q_FOREACH
+  - BOOST_FOREACH
+  - GIVEN
+  - WHEN
+  - THEN
+  - AND_THEN
+  - AND_WHEN
+  - SCENARIO
+  - CATCH_SCENARIO
+  - CATCH_GIVEN
+  - CATCH_WHEN
+  - CATCH_THEN
+  - CATCH_AND_THEN
+  - CATCH_AND_WHEN
+IncludeBlocks: Preserve
+IncludeCategories:
+  - Regex:           '^"(catch|llvm|llvm-c|clang|clang-c)/'
+    Priority:        2
+  - Regex:           '^(<|"(gtest|isl|json)/)'
+    Priority:        3
+  - Regex:           '.\*'
+    Priority:        1
+IndentWidth: 4
+IndentWrappedFunctionNames: false
+Language: Cpp
+ReflowComments: true
+MaxEmptyLinesToKeep: 4
+NamespaceIndentation: None
+PointerAlignment: Left
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SortUsingDeclarations: true
+SortIncludes: true
+SpaceAfterCStyleCast: true
+Standard: Cpp11
+PenaltyBreakBeforeFirstCallParameter: 0
+PenaltyReturnTypeOnItsOwnLine: 170
+UseTab: Never
+...
