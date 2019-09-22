@@ -1,10 +1,11 @@
 #include "roman.h"
 #include <cinttypes>
 #include <string>
+#include <string_view>
 
 #if !SLOW_BUT_READABLE
 
-constexpr alignas(64) const char* romand_decades[3][10]{
+constexpr const std::string_view romand_decades[3][10]{
     {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"},
     {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"},
     {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"},
@@ -18,8 +19,7 @@ std::string to_roman(unsigned int value) noexcept
     std::string s;
 
     auto milla = value / 1000;
-    for (auto i = 0u; i < milla; ++i)
-        s += 'M';
+    s.append(milla, 'M');
 
     value %= 1000;
     auto centum = value / 100;
