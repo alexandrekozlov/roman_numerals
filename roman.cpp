@@ -3,7 +3,9 @@
 #include <string>
 #include <string_view>
 
-#if !SLOW_BUT_READABLE
+#define SLOW_BUT_READABLE
+
+#if defined(SLOW_BUT_READABLE)
 
 constexpr const std::string_view romand_decades[3][10]{
     {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"},
